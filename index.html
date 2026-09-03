@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#ffffff">
+  <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="LV-FA | Authors">
@@ -19,9 +20,13 @@
     <div class="authors-container">
       <div class="app-header-inner authors-header-inner">
         <img src="./assets/logo.svg" alt="Letecký vykřičník & FlyAlert" class="brand-logo">
-        <h1 class="authors-header-title">LV-FA | Authors</h1>
-        <button id="dataMenuButton" class="profile-button" type="button" aria-label="Lokální databáze" title="Lokální databáze">
-          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M6 7.5C6 5.57 9.58 4 14 4s8 1.57 8 3.5S18.42 11 14 11 6 9.43 6 7.5Zm0 0v6c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5v-6m-16 6v6C6 21.43 9.58 23 14 23s8-1.57 8-3.5v-6" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <h1 class="authors-header-title">Databáze autorů</h1>
+        <button id="dataMenuButton" class="profile-button" type="button" aria-label="Nabídka databáze" title="Nabídka databáze">
+          <svg viewBox="0 0 28 28" aria-hidden="true">
+            <circle cx="8" cy="14" r="1.8" fill="white"/>
+            <circle cx="14" cy="14" r="1.8" fill="white"/>
+            <circle cx="20" cy="14" r="1.8" fill="white"/>
+          </svg>
         </button>
       </div>
     </div>
@@ -39,8 +44,7 @@
     <section class="authors-layout">
       <aside class="panel authors-sidebar" aria-label="Seznam autorů">
         <div class="sidebar-toolbar">
-          <button id="addAuthorButton" class="primary-button add-author-button" type="button">[+] Přidat nového autora</button>
-          <div class="sidebar-meta"><span>Autoři</span><span id="storageStatus">Lokálně</span></div>
+          <button id="addAuthorButton" class="primary-button add-author-button" type="button">Přidat nového autora</button>
         </div>
         <div id="authorList" class="author-list" role="list"></div>
         <div id="authorListEmpty" class="empty-gmail hidden">Žádný autor neodpovídá hledání.</div>
@@ -57,7 +61,6 @@
         <div id="authorDetail" class="hidden">
           <div class="detail-head">
             <div class="min-w-0">
-              <div class="detail-badges"><span id="detailStatus" class="status-badge">S potvrzením</span></div>
               <h2 id="detailName" class="detail-title"></h2>
               <a id="detailInstagram" class="detail-instagram hidden" target="_blank" rel="noopener"></a>
             </div>
@@ -67,21 +70,20 @@
             </div>
           </div>
 
+          <div id="notesSection" class="detail-section hidden">
+            <div class="eyebrow">Poznámky</div>
+            <div id="detailNotes" class="notes-value"></div>
+          </div>
+
           <div id="contactSection" class="detail-section hidden">
             <div class="eyebrow">Kontakt</div>
             <div id="detailContact" class="contact-value"></div>
-          </div>
-
-          <div id="databaseSection" class="detail-section hidden">
-            <div class="eyebrow">Databáze fotografií</div>
-            <a id="detailDatabaseUrl" class="detail-link" target="_blank" rel="noopener"></a>
           </div>
 
           <div class="detail-section">
             <div class="detail-section-head">
               <div>
                 <div class="eyebrow">Zdroje fotografií</div>
-                <div class="sources-help">Kliknutím na kredit ho okamžitě zkopíruješ.</div>
               </div>
               <span id="detailSourcesCount" class="detail-count"></span>
             </div>
@@ -109,18 +111,16 @@
       <form id="authorForm">
         <input type="hidden" name="id">
         <div class="author-form-grid">
-          <label class="field"><span>Jméno *</span><input name="firstName" required autocomplete="given-name"></label>
-          <label class="field"><span>Příjmení</span><input name="lastName" autocomplete="family-name"></label>
-          <label class="field field-wide"><span>Instagram</span><input name="instagram" placeholder="např. petrjuris"></label>
-          <label class="field field-wide"><span>Kontakt</span><input name="contact" placeholder="např. E-mail; Instagram / nebo konkrétní e-mail"></label>
-          <label class="field field-wide"><span>Odkaz na databázi fotografií</span><input name="photoDatabaseUrl" type="url" placeholder="https://drive.google.com/…"></label>
+          <label class="field field-wide"><span>Jméno a příjmení *</span><input name="name" required autocomplete="name"></label>
+          <label class="field field-wide"><span>Instagram</span><input name="instagram"></label>
+          <label class="field field-wide"><span>Poznámky</span><textarea name="notes" rows="4"></textarea></label>
+          <label class="field field-wide"><span>Kontakt</span><input name="contact"></label>
         </div>
 
         <div class="sources-editor">
           <div class="sources-editor-head">
             <div>
               <div class="eyebrow">Zdroje fotografií</div>
-              <div class="sources-help">Název webu, odkaz a kredit. Kredit se v detailu kopíruje jedním kliknutím.</div>
             </div>
             <button id="addSourceButton" class="secondary-button" type="button">+ Přidat odkaz</button>
           </div>
