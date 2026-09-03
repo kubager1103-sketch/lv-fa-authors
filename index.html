@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="LV-FA | Authors">
+  <title>LV-FA | Authors</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./assets/LV-FA_ICON.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="authors-header">
+    <div class="authors-container">
+      <div class="app-header-inner authors-header-inner">
+        <img src="./assets/logo.svg" alt="Letecký vykřičník & FlyAlert" class="brand-logo">
+        <h1 class="authors-header-title">LV-FA | Authors</h1>
+        <button id="dataMenuButton" class="profile-button" type="button" aria-label="Lokální databáze" title="Lokální databáze">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M6 7.5C6 5.57 9.58 4 14 4s8 1.57 8 3.5S18.42 11 14 11 6 9.43 6 7.5Zm0 0v6c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5v-6m-16 6v6C6 21.43 9.58 23 14 23s8-1.57 8-3.5v-6" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main authors-container authors-main">
+    <div id="appNotice" class="app-notice local-notice">Data se ukládají pouze do tohoto zařízení. Aplikace funguje i offline.</div>
+
+    <section class="global-search-wrap" aria-label="Vyhledávání autorů">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input id="authorSearch" class="global-search" type="search" autocomplete="off" placeholder="Hledat podle jména, Instagramu, kontaktu nebo webu…">
+      <span id="authorCount" class="search-count"></span>
+    </section>
+
+    <section class="authors-layout">
+      <aside class="panel authors-sidebar" aria-label="Seznam autorů">
+        <div class="sidebar-toolbar">
+          <button id="addAuthorButton" class="primary-button add-author-button" type="button">[+] Přidat nového autora</button>
+          <div class="sidebar-meta"><span>Autoři</span><span id="storageStatus">Lokálně</span></div>
+        </div>
+        <div id="authorList" class="author-list" role="list"></div>
+        <div id="authorListEmpty" class="empty-gmail hidden">Žádný autor neodpovídá hledání.</div>
+      </aside>
+
+      <section class="panel author-detail-panel" aria-label="Detail autora">
+        <div id="authorEmptyState" class="author-empty-state">
+          <div class="empty-symbol">↗</div>
+          <div class="eyebrow">Databáze</div>
+          <h2>Vyber autora</h2>
+          <p>Vlevo vyber autora nebo přidej nového.</p>
+        </div>
+
+        <div id="authorDetail" class="hidden">
+          <div class="detail-head">
+            <div class="min-w-0">
+              <div class="detail-badges"><span id="detailStatus" class="status-badge">S potvrzením</span></div>
+              <h2 id="detailName" class="detail-title"></h2>
+              <a id="detailInstagram" class="detail-instagram hidden" target="_blank" rel="noopener"></a>
+            </div>
+            <div class="detail-actions">
+              <button id="editAuthorButton" class="secondary-button" type="button">Editovat</button>
+              <button id="deleteAuthorButton" class="secondary-button danger-button" type="button">Smazat</button>
+            </div>
+          </div>
+
+          <div id="contactSection" class="detail-section hidden">
+            <div class="eyebrow">Kontakt</div>
+            <div id="detailContact" class="contact-value"></div>
+          </div>
+
+          <div id="databaseSection" class="detail-section hidden">
+            <div class="eyebrow">Databáze fotografií</div>
+            <a id="detailDatabaseUrl" class="detail-link" target="_blank" rel="noopener"></a>
+          </div>
+
+          <div class="detail-section">
+            <div class="detail-section-head">
+              <div>
+                <div class="eyebrow">Zdroje fotografií</div>
+                <div class="sources-help">Kliknutím na kredit ho okamžitě zkopíruješ.</div>
+              </div>
+              <span id="detailSourcesCount" class="detail-count"></span>
+            </div>
+            <div id="detailSources" class="source-link-list"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="app-footer">© Letecký vykřičník &amp; FlyAlert - Databáze autorů
+      <div class="brand-footer-bar" aria-label="Letecký vykřičník & FlyAlert">
+        <div class="brand-footer-inner">
+          <img class="brand-footer-logo brand-footer-logo-lv" src="./assets/LV_LOGO_WHITE.svg" alt="Letecký vykřičník">
+          <img class="brand-footer-logo brand-footer-logo-fa" src="./assets/FA_LOGO_WHITE.svg" alt="FlyAlert">
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div id="authorModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authorModalTitle">
+    <div class="modal-card author-modal-card">
+      <button id="authorModalClose" class="modal-close" type="button" aria-label="Zavřít">×</button>
+      <div class="eyebrow" id="authorModalEyebrow">Databáze</div>
+      <h2 id="authorModalTitle" class="author-modal-title">Přidat autora</h2>
+      <form id="authorForm">
+        <input type="hidden" name="id">
+        <div class="author-form-grid">
+          <label class="field"><span>Jméno *</span><input name="firstName" required autocomplete="given-name"></label>
+          <label class="field"><span>Příjmení</span><input name="lastName" autocomplete="family-name"></label>
+          <label class="field field-wide"><span>Instagram</span><input name="instagram" placeholder="např. petrjuris"></label>
+          <label class="field field-wide"><span>Kontakt</span><input name="contact" placeholder="např. E-mail; Instagram / nebo konkrétní e-mail"></label>
+          <label class="field field-wide"><span>Odkaz na databázi fotografií</span><input name="photoDatabaseUrl" type="url" placeholder="https://drive.google.com/…"></label>
+        </div>
+
+        <div class="sources-editor">
+          <div class="sources-editor-head">
+            <div>
+              <div class="eyebrow">Zdroje fotografií</div>
+              <div class="sources-help">Název webu, odkaz a kredit. Kredit se v detailu kopíruje jedním kliknutím.</div>
+            </div>
+            <button id="addSourceButton" class="secondary-button" type="button">+ Přidat odkaz</button>
+          </div>
+          <div id="sourceRows" class="source-rows"></div>
+        </div>
+
+        <div id="formMessage" class="form-message hidden"></div>
+        <div class="modal-actions">
+          <button id="cancelAuthorButton" class="secondary-button" type="button">Zrušit</button>
+          <button id="saveAuthorButton" class="primary-button" type="submit">Uložit →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="dataMenu" class="profile-menu hidden">
+    <div class="profile-menu-identity"><strong>Lokální databáze</strong><br>Data jsou uložená přímo v tomto prohlížeči.</div>
+    <div class="data-menu-actions">
+      <button id="exportButton" class="secondary-button" type="button">Exportovat databázi</button>
+      <button id="importButton" class="secondary-button" type="button">Importovat databázi</button>
+      <button id="resetButton" class="secondary-button danger-button" type="button">Obnovit výchozí data</button>
+    </div>
+    <input id="importFile" type="file" accept="application/json,.json" class="hidden">
+  </div>
+
+  <div id="toast" class="copy-toast hidden" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
