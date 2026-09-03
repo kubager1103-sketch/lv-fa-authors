@@ -1,7 +1,3 @@
-# LV-FA | Authors – private offline PWA
+# LV-FA | Authors v6
 
-Tato verze neobsahuje žádné předvyplněné autory ani kontaktní údaje.
-Databáze začíná prázdná a nově přidaná data se ukládají pouze lokálně v daném prohlížeči / PWA.
-
-Obsah ZIPu nahraj přímo do kořene GitHub Pages repozitáře.
-Po aktualizaci stránku jednou obnov, aby se aktivovala nová verze service workeru.
+Oprava aktualizací PWA: nový service worker používá síť jako první zdroj pro HTML/CSS/JS a staré cache maže při aktivaci. Prázdný stav už neobsahuje žádnou ikonku ani emoji.
