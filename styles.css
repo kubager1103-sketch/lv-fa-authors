@@ -796,3 +796,47 @@ footer {
     height:19px;
   }
 }
+
+/* v9: lighter desktop header title */
+.authors-header-title {
+  font-weight: 400;
+}
+
+/* v9: more compact author detail */
+.detail-head {
+  padding-bottom: 16px;
+}
+
+.detail-section {
+  padding: 16px 0;
+}
+
+.detail-title {
+  margin-top: 2px;
+}
+
+.detail-instagram {
+  margin-top: 5px;
+}
+
+.source-link-list {
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .detail-head {
+    padding-bottom: 14px;
+  }
+
+  .detail-section {
+    padding: 14px 0;
+  }
+
+  .detail-title {
+    margin-top: 0;
+  }
+
+  .detail-instagram {
+    margin-top: 4px;
+  }
+}
