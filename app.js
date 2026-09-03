@@ -99,4 +99,4 @@ els.importButton.addEventListener("click",()=>els.importFile.click()); els.impor
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();els.dataMenu.classList.add("hidden");}});
 
 load(); render();
-if("serviceWorker" in navigator && location.protocol!=="file:"){ window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{})); }
+if("serviceWorker" in navigator && location.protocol!=="file:"){ window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(r=>r.update()).catch(()=>{})); }
