@@ -1,20 +1,5 @@
-const STORAGE_KEY = "lvfa_authors_offline_v1";
+const STORAGE_KEY = "lvfa_authors_offline_v3";
 
-const DEFAULT_AUTHORS = [
-  {id:"clement-alloing",name:"Clément Alloing",instagram:"",notes:"",contact:"clement.alloing@gmail.com",sourceLinks:[{label:"Flickr.com",url:"https://www.flickr.com/photos/bycac/",credit:"Clément Alloing | Flickr.com"}]},
-  {id:"sean-noel-oconnell",name:"Seán Noel O'Connell",instagram:"seannoeloconnell",notes:"",contact:"Instagram",sourceLinks:[{label:"Flickr.com",url:"https://www.flickr.com/photos/134579296@N02/",credit:"Seán Noel O'Connell | @seannoeloconnell | Flickr.com"}]},
-  {id:"petr-juris",name:"Petr Juriš",instagram:"petrjuris",notes:"",contact:"E-mail; Instagram",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/276808/photos",credit:"Petr Juriš | @petrjuris | Jetphotos.com"},{label:"Flickr.com",url:"https://www.flickr.com/photos/197758286@N06/",credit:"Petr Juriš | @petrjuris | Flickr.com"}]},
-  {id:"jan-jurecka",name:"Jan Jurečka",instagram:"",notes:"",contact:"E-mail; Instagram",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/33386/photos",credit:"Jan Jurečka | Jetphotos.com"},{label:"Planespotters.net",url:"https://www.planespotters.net/photos/gallery/Metaxa",credit:"Jan Jurečka | Planespotters.net"},{label:"Planes.cz",url:"https://www.planes.cz/cs/photos?fulltext=Metaxa",credit:"Jan Jurečka | Planes.cz"}]},
-  {id:"tomas-cibulka",name:"Tomáš Cibulka",instagram:"",notes:"",contact:"/ (via Eliška Vykysalá)",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/58804/photos",credit:"Tomáš Cibulka | Jetphotos.com"}]},
-  {id:"vinh-xuan-dinh",name:"Vinh Xuan Dinh",instagram:"",notes:"",contact:"E-mail",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/403173/photos",credit:"Vinh Xuan Dinh | Jetphotos.com"},{label:"Planes.cz",url:"https://www.planes.cz/cs/photos?author_id=11217&author_name=Vinh+Xuan+Dinh",credit:"Vinh Xuan Dinh | Planes.cz"}]},
-  {id:"maxim-weber",name:"Maxim Weber",instagram:"spotter.maxim",notes:"",contact:"Instagram; Flickr",sourceLinks:[{label:"Flickr.com",url:"https://www.flickr.com/photos/200642066@N03/",credit:"Maxim Weber | @spotter.maxim | Flickr.com"},{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/347412/photos",credit:"Maxim Weber | @spotter.maxim | Jetphotos.com"},{label:"Planespotters.net",url:"https://www.planespotters.net/photo/search?photographer=Maxim+Weber",credit:"Maxim Weber | @spotter.maxim | Planespotters.net"}]},
-  {id:"stepan-bajger",name:"Štěpán Bajger",instagram:"stepan_bajger",notes:"",contact:"Instagram; E-mail",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/193269/photos?term=Stepan%20Bajger",credit:"Štěpán Bajger | @stepan_bajger | Jetphotos.com"},{label:"Planes.cz",url:"https://www.planes.cz/cs/photos?author_id=10302&author_name=%C5%A0t%C4%9Bp%C3%A1n+Bajger",credit:"Štěpán Bajger | @stepan_bajger | Planes.cz"},{label:"Planespotters.net",url:"https://www.planespotters.net/photo/1759459/oe-lax-swiftair-airbus-a321-211-p2f",credit:"Štěpán Bajger | @stepan_bajger | Planespotters.net"}]},
-  {id:"eliska-vykysala",name:"Eliška Vykysalá",instagram:"",notes:"",contact:"E-mail",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/66806/photos",credit:"Eliška Vykysalá | Jetphotos.com"}]},
-  {id:"dominik-schwab",name:"Dominik Schwab",instagram:"nickfromprg",notes:"",contact:"Instagram; E-mail",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/206530/photos",credit:"Dominik Schwab | @nickfromprg | Jetphotos.com"}]},
-  {id:"kornel-mierzwinski",name:"Kornel Mierzwiński",instagram:"",notes:"",contact:"E-mail",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/39413/photos",credit:"Kornel Mierzwiński | Jetphotos.com"},{label:"Planespotters.net",url:"https://www.planespotters.net/photos/gallery/Kornel_Mierzwinski",credit:"Kornel Mierzwiński | Planespotters.net"},{label:"Airliners.net",url:"https://www.airliners.net/search?user=624323&sortBy=dateAccepted&sortOrder=desc&perPage=84&display=detail",credit:"Kornel Mierzwiński | Airliners.net"}]},
-  {id:"waibibabu",name:"Waibibabu",instagram:"",notes:"",contact:"E-mail",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/417682/photos",credit:"Waibibabu | Jetphotos.com"}]},
-  {id:"vaclav-kudela",name:"Václav Kudela",instagram:"",notes:"",contact:"Whatsapp; E-mail",sourceLinks:[{label:"Jetphotos.com",url:"https://www.jetphotos.com/photographer/18437/photos",credit:"Václav Kudela | Jetphotos.com"},{label:"Planespotters.net",url:"https://www.planespotters.net/photo/search?photographer=V%C3%A1clav+Kudela",credit:"Václav Kudela | Planespotters.net"},{label:"Airliners.net",url:"https://www.airliners.net/user/VASEK/profile/photos",credit:"Václav Kudela | Airliners.net"},{label:"Flickr.com",url:"https://www.flickr.com/photos/186263525@N08/with/50183300633",credit:"Václav Kudela | Flickr.com"},{label:"Zonerama.com",url:"https://eu.zonerama.com/VaclavKudela/948337",credit:"Václav Kudela | Zonerama.com"}]}
-];
 
 const state = { authors: [], selectedId: null, query: "" };
 const $ = s => document.querySelector(s);
@@ -27,7 +12,7 @@ const els = {
   modalTitle: $("#authorModalTitle"), modalEyebrow: $("#authorModalEyebrow"), form: $("#authorForm"), sourceRows: $("#sourceRows"),
   addSource: $("#addSourceButton"), cancel: $("#cancelAuthorButton"), formMessage: $("#formMessage"),
   dataMenuButton: $("#dataMenuButton"), dataMenu: $("#dataMenu"), exportButton: $("#exportButton"), importButton: $("#importButton"),
-  importFile: $("#importFile"), resetButton: $("#resetButton"), toast: $("#toast")
+  importFile: $("#importFile"), toast: $("#toast")
 };
 
 function clone(v){ return JSON.parse(JSON.stringify(v)); }
@@ -41,11 +26,10 @@ function esc(v=""){ return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 function load(){
   try {
     const raw=localStorage.getItem(STORAGE_KEY);
-    state.authors = raw ? JSON.parse(raw) : clone(DEFAULT_AUTHORS);
-    if(!raw) save();
-  } catch { state.authors=clone(DEFAULT_AUTHORS); }
-  state.authors = Array.isArray(state.authors) ? state.authors : clone(DEFAULT_AUTHORS);
-  state.selectedId = state.authors[0]?.id || null;
+    state.authors = raw ? JSON.parse(raw) : [];
+  } catch { state.authors=[]; }
+  state.authors = Array.isArray(state.authors) ? state.authors : [];
+  state.selectedId = sortAuthors(state.authors)[0]?.id || null;
 }
 function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state.authors)); }
 function filtered(){
@@ -113,7 +97,6 @@ els.addSource.addEventListener("click",()=>els.sourceRows.appendChild(sourceRow(
 els.dataMenuButton.addEventListener("click",e=>{e.stopPropagation();els.dataMenu.classList.toggle("hidden");}); document.addEventListener("click",e=>{if(!els.dataMenu.contains(e.target)&&e.target!==els.dataMenuButton)els.dataMenu.classList.add("hidden");});
 els.exportButton.addEventListener("click",()=>{const blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),authors:state.authors},null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`flyalert-autori-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);els.dataMenu.classList.add("hidden");showToast("Databáze exportována");});
 els.importButton.addEventListener("click",()=>els.importFile.click()); els.importFile.addEventListener("change",async()=>{const file=els.importFile.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());const authors=Array.isArray(data)?data:data.authors;if(!Array.isArray(authors))throw new Error();if(!confirm(`Importovat ${authors.length} autorů a nahradit současná data?`))return;state.authors=authors;state.selectedId=sortAuthors(state.authors)[0]?.id||null;save();render();showToast("Databáze importována");}catch{alert("Soubor se nepodařilo importovat. Zkontroluj, že jde o JSON export z této aplikace.");}finally{els.importFile.value="";els.dataMenu.classList.add("hidden");}});
-els.resetButton.addEventListener("click",()=>{if(confirm("Obnovit původní předvyplněné autory? Současná lokální data budou nahrazena.")){state.authors=clone(DEFAULT_AUTHORS);state.selectedId=sortAuthors(state.authors)[0]?.id||null;save();render();els.dataMenu.classList.add("hidden");showToast("Výchozí data obnovena");}});
 
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();els.dataMenu.classList.add("hidden");}});
 

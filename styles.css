@@ -628,8 +628,7 @@ footer {
 .detail-badges { display:flex; gap:6px; margin-bottom:6px; }
 .status-badge { display:inline-flex; align-items:center; border:1px solid #d9d9d9; border-radius:999px; padding:4px 7px; font-size:8px; font-weight:600; color:#555; background:#fff; }
 .contact-value { margin-top:9px; font-size:11px; font-weight:500; white-space:pre-wrap; }
-.source-credit-card { border:1px solid #ddd; border-radius:10px; padding:12px; background:#fff; transition:border-color .15s ease; }
-.source-credit-card:hover { border-color:#111; }
+.source-credit-card { border:1px solid #ddd; border-radius:10px; padding:12px; background:#fff; }
 .source-credit-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
 .source-open-button { width:32px; height:32px; flex:0 0 auto; display:grid; place-items:center; border:1px solid #ddd; border-radius:8px; color:#111; text-decoration:none; background:#fff; font-size:14px; }
 .source-open-button:hover { border-color:#111; background:#f8f8f8; }
@@ -700,8 +699,8 @@ footer {
 .credit-copy-label { display:none !important; }
 
 @media (max-width: 640px) {
-  .authors-header-title { display:block; font-size:11px; }
-  .brand-logo { width:150px; }
+  .authors-header-title { display:none !important; }
+  .brand-logo { width:190px; }
   .profile-button { width:40px; height:40px; }
   .profile-button svg { width:24px; height:24px; }
   .local-notice { font-size:7.5px; margin-bottom:10px; }
@@ -710,6 +709,6 @@ footer {
 }
 
 @media (max-width: 430px) {
-  .authors-header-title { font-size:10px; }
-  .brand-logo { width:132px; }
+  .authors-header-title { display:none !important; }
+  .brand-logo { width:190px; }
 }
