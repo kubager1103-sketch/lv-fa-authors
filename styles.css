@@ -538,7 +538,7 @@ footer {
 .search-count { position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:9px; color:#777; }
 
 .authors-layout { display:grid; grid-template-columns:minmax(290px, 0.38fr) minmax(0, 0.62fr); gap:28px; align-items:start; min-height:560px; }
-.authors-sidebar { overflow:hidden; min-height:560px; }
+.authors-sidebar { overflow:hidden; min-height:0; align-self:start; }
 .sidebar-toolbar { padding:16px; border-bottom:1px solid #ececec; }
 .add-author-button { width:100%; }
 .sidebar-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:13px; font-size:8px; color:#777; text-transform:uppercase; letter-spacing:.1em; }
@@ -550,7 +550,7 @@ footer {
 .author-list-ig { margin-top:4px; font-size:9px; color:#777; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .author-list-arrow { flex:none; font-size:14px; color:#aaa; }
 
-.author-detail-panel { min-height:560px; padding:26px; }
+.author-detail-panel { min-height:0; padding:26px; align-self:start; }
 .author-empty-state { min-height:505px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
 .empty-symbol { width:48px; height:48px; display:grid; place-items:center; border:1px solid #ddd; border-radius:50%; margin-bottom:15px; font-size:20px; }
 .author-empty-state h2 { margin:6px 0 0; font-size:19px; font-weight:600; }
@@ -595,8 +595,8 @@ footer {
   .authors-layout { grid-template-columns:1fr; min-height:0; }
   .authors-sidebar { min-height:0; }
   .author-list { max-height:340px; }
-  .author-detail-panel { min-height:430px; }
-  .author-empty-state { min-height:375px; }
+  .author-detail-panel { min-height:0; }
+  .author-empty-state { min-height:0; }
 }
 @media (max-width: 640px) {
   .authors-container { padding-left:18px; padding-right:18px; }
@@ -607,9 +607,23 @@ footer {
   .search-count { right:12px; font-size:8px; }
   .authors-layout { gap:16px; }
   .author-detail-panel { padding:18px; }
-  .detail-head { flex-direction:column; }
-  .detail-actions { width:100%; }
-  .detail-actions button { flex:1; }
+  .detail-head { position:relative; display:block; padding-right:72px; }
+  .detail-actions {
+    position:absolute;
+    top:0;
+    right:0;
+    width:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:6px;
+  }
+  .detail-actions button {
+    flex:none;
+    min-width:62px;
+    padding:7px 9px;
+    font-size:8px;
+  }
   .detail-title { font-size:22px; }
   .source-link-card { grid-template-columns:1fr auto; }
   .source-link-url { grid-column:1 / -1; grid-row:2; }
@@ -624,11 +638,11 @@ footer {
 }
 
 /* Offline author database additions */
-.local-notice { background:#fafafa; color:#555; }
 .detail-badges { display:flex; gap:6px; margin-bottom:6px; }
 .status-badge { display:inline-flex; align-items:center; border:1px solid #d9d9d9; border-radius:999px; padding:4px 7px; font-size:8px; font-weight:600; color:#555; background:#fff; }
 .contact-value { margin-top:9px; font-size:11px; font-weight:500; white-space:pre-wrap; }
 .source-credit-card { border:1px solid #ddd; border-radius:10px; padding:12px; background:#fff; }
+
 .source-credit-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
 .source-open-button { width:32px; height:32px; flex:0 0 auto; display:grid; place-items:center; border:1px solid #ddd; border-radius:8px; color:#111; text-decoration:none; background:#fff; font-size:14px; }
 .source-open-button:hover { border-color:#111; background:#f8f8f8; }
@@ -645,17 +659,7 @@ footer {
 .source-credit-field { min-width:0; }
 @media (max-width:760px){ .offline-source-row { grid-template-columns:1fr 36px; } .offline-source-row .field { grid-column:1 / -1; } .offline-source-row .source-remove { grid-column:2; grid-row:3; align-self:end; } }
 
-/* LV-FA Authors v2 refinements */
-.local-notice {
-  margin: 0 0 12px;
-  padding: 0 2px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: #9a9a9a;
-  font-size: 8px;
-  line-height: 1.4;
-}
+/* LV-FA Authors v4 refinements */
 .sidebar-toolbar { padding-bottom: 16px; }
 .author-list-item,
 .author-list-item:visited,
@@ -703,7 +707,6 @@ footer {
   .brand-logo { width:190px; }
   .profile-button { width:40px; height:40px; }
   .profile-button svg { width:24px; height:24px; }
-  .local-notice { font-size:7.5px; margin-bottom:10px; }
   .author-list-item { color:#111 !important; }
   .credit-copy-button strong { color:#111 !important; -webkit-text-fill-color:#111; }
 }
@@ -711,4 +714,18 @@ footer {
 @media (max-width: 430px) {
   .authors-header-title { display:none !important; }
   .brand-logo { width:190px; }
+}
+
+/* v4: compact content-driven panels */
+.authors-layout { align-items:start; }
+.authors-sidebar,
+.author-detail-panel { height:auto; align-self:start; }
+.author-detail-panel { overflow:visible; }
+.source-credit-card { cursor:default; }
+@media (max-width: 640px) {
+  .authors-header-title { display:none !important; }
+  .brand-logo { width:190px !important; }
+  .author-detail-panel { min-height:0 !important; height:auto; }
+  .authors-sidebar { min-height:0 !important; height:auto; }
+  .detail-head { min-height:72px; }
 }

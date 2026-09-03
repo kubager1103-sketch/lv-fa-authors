@@ -1,12 +1,7 @@
-# LV-FA | Authors
+# LV-FA | Authors – private offline PWA
 
-Čistě offline PWA databáze autorů.
+Tato verze neobsahuje žádné předvyplněné autory ani kontaktní údaje.
+Databáze začíná prázdná a nově přidaná data se ukládají pouze lokálně v daném prohlížeči / PWA.
 
-- Aplikace neobsahuje žádné předvyplněné autory ani osobní údaje.
-- Nově přidaná data se ukládají pouze lokálně do tohoto prohlížeče / zařízení.
-- Export a import JSON slouží pro ruční přenos nebo zálohu databáze.
-- GitHub Pages hostuje pouze statické soubory aplikace.
-
-## PWA
-
-Nahraj obsah této složky do kořene GitHub Pages repozitáře. `index.html` musí být přímo v kořeni.
+Obsah ZIPu nahraj přímo do kořene GitHub Pages repozitáře.
+Po aktualizaci stránku jednou obnov, aby se aktivovala nová verze service workeru.

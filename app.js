@@ -1,5 +1,4 @@
-const STORAGE_KEY = "lvfa_authors_offline_v3";
-
+const STORAGE_KEY = "lvfa_authors_private_v4";
 
 const state = { authors: [], selectedId: null, query: "" };
 const $ = s => document.querySelector(s);
@@ -15,7 +14,6 @@ const els = {
   importFile: $("#importFile"), toast: $("#toast")
 };
 
-function clone(v){ return JSON.parse(JSON.stringify(v)); }
 function fullName(a){ return String(a.name || [a.firstName,a.lastName].filter(Boolean).join(" ")).trim(); }
 function handle(v=""){ return String(v).trim().replace(/^@/,"").replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/\/$/,""); }
 function safeUrl(v=""){ const x=String(v).trim(); if(!x) return ""; try{return new URL(/^https?:\/\//i.test(x)?x:`https://${x}`).href;}catch{return x;} }
