@@ -728,3 +728,71 @@ footer {
   .authors-sidebar { min-height:0 !important; height:auto; }
   .detail-head { min-height:72px; }
 }
+
+
+/* v8: icon-only edit/delete actions */
+.detail-actions {
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:8px;
+}
+
+.icon-action-button {
+  width:44px;
+  height:44px;
+  min-width:44px;
+  padding:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #d9d9d9;
+  border-radius:9px;
+  background:#fff;
+  color:#111;
+  cursor:pointer;
+}
+
+.icon-action-button svg {
+  width:20px;
+  height:20px;
+  display:block;
+}
+
+.icon-action-button:hover {
+  border-color:#111;
+  background:#fafafa;
+}
+
+@media (max-width: 640px) {
+  .detail-head {
+    position:relative;
+    display:block;
+    padding-right:104px;
+    min-height:58px;
+  }
+
+  .detail-actions {
+    position:absolute;
+    top:0;
+    right:0;
+    width:auto;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:7px;
+  }
+
+  .detail-actions .icon-action-button {
+    width:42px;
+    height:42px;
+    min-width:42px;
+    padding:0;
+    border-radius:9px;
+  }
+
+  .detail-actions .icon-action-button svg {
+    width:19px;
+    height:19px;
+  }
+}
