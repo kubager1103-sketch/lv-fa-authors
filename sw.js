@@ -1,4 +1,4 @@
-const CACHE = "lvfa-authors-offline-v13";
+const CACHE = "lvfa-authors-offline-v14";
 const SHELL = [
   "./",
   "./index.html",
