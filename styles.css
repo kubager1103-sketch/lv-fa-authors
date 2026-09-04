@@ -915,3 +915,99 @@ footer {
     height: 39px;
   }
 }
+
+
+/* V13 — hard protection against horizontal stretching by long URLs/text */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.authors-container,
+.authors-main,
+.authors-layout,
+.authors-sidebar,
+.author-detail-panel,
+#authorDetail,
+.detail-section,
+.source-link-list,
+.source-credit-card,
+.source-credit-top,
+.source-credit-top > div,
+.credit-copy-button {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.authors-layout {
+  width: 100%;
+  overflow: hidden;
+}
+
+.author-detail-panel,
+.source-credit-card {
+  overflow: hidden;
+}
+
+.source-credit-top {
+  width: 100%;
+}
+
+.source-credit-top > div {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+/* Long source URL stays on one line, never widens the card,
+   and softly disappears at the end. */
+.source-credit-card .source-link-url {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  overflow-wrap: normal;
+  word-break: normal;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(100% - 30px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(100% - 30px),
+    transparent 100%
+  );
+}
+
+.source-open-button {
+  flex: 0 0 auto;
+}
+
+.credit-copy-button strong {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .authors-container,
+  .authors-main,
+  .authors-layout,
+  .authors-sidebar,
+  .author-detail-panel,
+  #authorDetail,
+  .detail-section,
+  .source-link-list,
+  .source-credit-card,
+  .source-credit-top {
+    width: 100%;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
