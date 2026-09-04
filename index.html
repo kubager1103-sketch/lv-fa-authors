@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" href="./assets/LV-FA_ICON.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
   <link rel="stylesheet" href="./styles.css">
-  <meta name="lvfa-build" content="v11-url-fade">
+  <meta name="lvfa-build" content="v12-garet-form-fix">
 </head>
 <body>
   <header class="authors-header">
@@ -120,7 +120,7 @@
         <div class="author-form-grid">
           <label class="field field-wide"><span>Jméno a příjmení *</span><input name="name" required autocomplete="name"></label>
           <label class="field field-wide"><span>Instagram</span><input name="instagram"></label>
-          <label class="field field-wide"><span>Poznámky</span><textarea name="notes" rows="4"></textarea></label>
+          <label class="field field-wide"><span>Poznámky</span><textarea name="notes" rows="1"></textarea></label>
           <label class="field field-wide"><span>Kontakt</span><input name="contact"></label>
         </div>
 
@@ -129,9 +129,9 @@
             <div>
               <div class="eyebrow">Zdroje fotografií</div>
             </div>
-            <button id="addSourceButton" class="secondary-button" type="button">+ Přidat odkaz</button>
           </div>
           <div id="sourceRows" class="source-rows"></div>
+          <button id="addSourceButton" class="secondary-button add-source-bottom" type="button">+ Přidat odkaz</button>
         </div>
 
         <div id="formMessage" class="form-message hidden"></div>

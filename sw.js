@@ -1,4 +1,4 @@
-const CACHE = "lvfa-authors-offline-v11";
+const CACHE = "lvfa-authors-offline-v12";
 const SHELL = [
   "./",
   "./index.html",
@@ -9,6 +9,8 @@ const SHELL = [
   "./assets/LV-FA_ICON.png",
   "./assets/LV_LOGO_WHITE.svg",
   "./assets/FA_LOGO_WHITE.svg",
+  "./assets/Garet-Regular.otf",
+  "./assets/Garet-Bold.otf",
   "./assets/pwa-192.png",
   "./assets/pwa-512.png",
   "./assets/apple-touch-icon.png"

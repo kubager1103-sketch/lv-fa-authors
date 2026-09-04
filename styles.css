@@ -1,8 +1,15 @@
 @font-face {
   font-family: "Garet";
-  src: url("/assets/Garet-Regular.otf") format("opentype");
+  src: url("./assets/Garet-Regular.otf") format("opentype");
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Garet";
+  src: url("./assets/Garet-Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 600 900;
   font-display: swap;
 }
 
@@ -842,81 +849,69 @@ footer {
 }
 
 
-/* URL overflow fix — long source URLs must never widen the card/page */
-.authors-layout,
-.authors-sidebar,
-.author-detail-panel,
-.source-credit-card,
-.source-credit-top {
-  min-width: 0;
-  max-width: 100%;
+/* V12 — compact notes + cleaner source editor */
+.field textarea[name="notes"] {
+  min-height: 39px;
+  height: 39px;
+  resize: vertical;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.author-detail-panel,
-.source-credit-card {
-  overflow: hidden;
+.add-source-bottom {
+  margin-top: 10px;
+  width: auto;
+  justify-self: end;
 }
 
-.source-credit-top {
-  width: 100%;
+/* Desktop: source fields in one clean row, delete at the very end. */
+.offline-source-row {
+  grid-template-columns: 140px minmax(0,1fr) minmax(180px,.8fr) 36px;
+  align-items: end;
+}
+.source-remove,
+.source-remove:visited {
+  color: #111 !important;
+  -webkit-text-fill-color: #111 !important;
+  border-color: #ddd;
+  background: #fff;
 }
 
-.source-credit-top > div {
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-/* Show as much of the URL as fits and softly fade the end. */
-.source-credit-card .source-link-url {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
-  overflow-wrap: normal;
-  word-break: normal;
-
-  -webkit-mask-image: linear-gradient(
-    to right,
-    #000 0%,
-    #000 calc(100% - 34px),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    #000 0%,
-    #000 calc(100% - 34px),
-    transparent 100%
-  );
-}
-
-.source-credit-card .source-open-button {
-  flex: 0 0 auto;
-}
-
-.credit-copy-button {
-  min-width: 0;
-  max-width: 100%;
-}
-
-.credit-copy-button strong {
-  min-width: 0;
-  max-width: 100%;
-}
-
-/* Extra protection against a single long value creating horizontal scroll on mobile. */
-@media (max-width: 900px) {
-  .authors-layout,
-  .author-detail-panel,
-  .source-credit-card,
-  .source-credit-top,
-  .source-credit-top > div {
+/* Mobile: stack Web / Odkaz / Kredit and put X after the last field.
+   No reserved empty grid column, so there is no large blank gap. */
+@media (max-width:760px) {
+  .sources-editor-head {
+    display: block;
+  }
+  .source-rows {
+    gap: 10px;
+  }
+  .offline-source-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px;
+  }
+  .offline-source-row .field,
+  .offline-source-row .source-credit-field {
     width: 100%;
-    max-width: 100%;
     min-width: 0;
+  }
+  .offline-source-row .source-remove {
+    width: 36px;
+    height: 36px;
+    align-self: flex-end;
+    margin: 0;
+    color: #111 !important;
+    -webkit-text-fill-color: #111 !important;
+  }
+  .add-source-bottom {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .field textarea[name="notes"] {
+    min-height: 39px;
+    height: 39px;
   }
 }
