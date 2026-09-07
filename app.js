@@ -4,7 +4,7 @@ const state = { authors: [], selectedId: null, query: "" };
 const $ = s => document.querySelector(s);
 const els = {
   search: $("#authorSearch"), count: $("#authorCount"), list: $("#authorList"), emptyList: $("#authorListEmpty"),
-  add: $("#addAuthorButton"), emptyDetail: $("#authorEmptyState"), detail: $("#authorDetail"), name: $("#detailName"),
+  add: $("#addAuthorButton"), detailPanel: $(".author-detail-panel"), emptyDetail: $("#authorEmptyState"), detail: $("#authorDetail"), name: $("#detailName"),
   instagram: $("#detailInstagram"), notesSection: $("#notesSection"), notes: $("#detailNotes"), contactSection: $("#contactSection"), contact: $("#detailContact"),
   sources: $("#detailSources"), sourcesCount: $("#detailSourcesCount"),
   edit: $("#editAuthorButton"), del: $("#deleteAuthorButton"), modal: $("#authorModal"), modalClose: $("#authorModalClose"),
@@ -21,13 +21,15 @@ function sortAuthors(items){ return [...items].sort((a,b)=>fullName(a).localeCom
 function uid(){ return `author-${Date.now()}-${Math.random().toString(36).slice(2,8)}`; }
 function esc(v=""){ return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
+function isMobileLayout(){ return window.matchMedia("(max-width: 640px)").matches; }
+
 function load(){
   try {
     const raw=localStorage.getItem(STORAGE_KEY);
     state.authors = raw ? JSON.parse(raw) : [];
   } catch { state.authors=[]; }
   state.authors = Array.isArray(state.authors) ? state.authors : [];
-  state.selectedId = sortAuthors(state.authors)[0]?.id || null;
+  state.selectedId = isMobileLayout() ? null : (sortAuthors(state.authors)[0]?.id || null);
 }
 function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state.authors)); }
 function filtered(){
@@ -41,11 +43,24 @@ function filtered(){
 function renderList(){
   const items=filtered(); els.count.textContent=`${items.length} / ${state.authors.length}`; els.emptyList.classList.toggle("hidden",items.length>0);
   els.list.innerHTML=items.map(a=>`<button class="author-list-item ${a.id===state.selectedId?"active":""}" data-id="${esc(a.id)}" type="button"><span class="author-list-name">${esc(fullName(a))}</span><span class="author-list-arrow">›</span></button>`).join("");
-  els.list.querySelectorAll("[data-id]").forEach(b=>b.addEventListener("click",()=>{state.selectedId=b.dataset.id;render();}));
+  els.list.querySelectorAll("[data-id]").forEach(b=>b.addEventListener("click",()=>{
+    state.selectedId=b.dataset.id;
+    render();
+    if(isMobileLayout()){
+      requestAnimationFrame(()=>{
+        const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        els.detailPanel.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"start"});
+      });
+    }
+  }));
 }
 function renderDetail(){
   const a=state.authors.find(x=>x.id===state.selectedId);
-  els.emptyDetail.classList.toggle("hidden",!!a); els.detail.classList.toggle("hidden",!a); if(!a)return;
+  const hideWholePanel=isMobileLayout() && !a;
+  els.detailPanel.classList.toggle("mobile-detail-hidden",hideWholePanel);
+  els.emptyDetail.classList.toggle("hidden",!!a);
+  els.detail.classList.toggle("hidden",!a);
+  if(!a)return;
   els.name.textContent=fullName(a);
   const ig=handle(a.instagram); els.instagram.classList.toggle("hidden",!ig); if(ig){els.instagram.textContent=`@${ig}`;els.instagram.href=`https://www.instagram.com/${encodeURIComponent(ig)}/`;}
   els.notesSection.classList.toggle("hidden",!a.notes); els.notes.textContent=a.notes||"";
@@ -89,12 +104,12 @@ els.form.addEventListener("submit",e=>{
 
 els.search.addEventListener("input",()=>{state.query=els.search.value;renderList();});
 els.add.addEventListener("click",()=>openModal()); els.edit.addEventListener("click",()=>{const a=state.authors.find(x=>x.id===state.selectedId);if(a)openModal(a);});
-els.del.addEventListener("click",()=>{const a=state.authors.find(x=>x.id===state.selectedId);if(!a)return;if(confirm(`Opravdu smazat autora ${fullName(a)}?`)){state.authors=state.authors.filter(x=>x.id!==a.id);state.selectedId=sortAuthors(state.authors)[0]?.id||null;save();render();showToast("Autor smazán");}});
+els.del.addEventListener("click",()=>{const a=state.authors.find(x=>x.id===state.selectedId);if(!a)return;if(confirm(`Opravdu smazat autora ${fullName(a)}?`)){state.authors=state.authors.filter(x=>x.id!==a.id);state.selectedId=isMobileLayout()?null:(sortAuthors(state.authors)[0]?.id||null);save();render();showToast("Autor smazán");}});
 els.addSource.addEventListener("click",()=>els.sourceRows.appendChild(sourceRow())); els.modalClose.addEventListener("click",closeModal); els.cancel.addEventListener("click",closeModal); els.modal.addEventListener("click",e=>{if(e.target===els.modal)closeModal();});
 
 els.dataMenuButton.addEventListener("click",e=>{e.stopPropagation();els.dataMenu.classList.toggle("hidden");}); document.addEventListener("click",e=>{if(!els.dataMenu.contains(e.target)&&e.target!==els.dataMenuButton)els.dataMenu.classList.add("hidden");});
 els.exportButton.addEventListener("click",()=>{const blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),authors:state.authors},null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`lv-fa-authors-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);els.dataMenu.classList.add("hidden");showToast("Databáze exportována");});
-els.importButton.addEventListener("click",()=>els.importFile.click()); els.importFile.addEventListener("change",async()=>{const file=els.importFile.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());const authors=Array.isArray(data)?data:data.authors;if(!Array.isArray(authors))throw new Error();if(!confirm(`Importovat ${authors.length} autorů a nahradit současná data?`))return;state.authors=authors;state.selectedId=sortAuthors(state.authors)[0]?.id||null;save();render();showToast("Databáze importována");}catch{alert("Soubor se nepodařilo importovat. Zkontroluj, že jde o JSON export z této aplikace.");}finally{els.importFile.value="";els.dataMenu.classList.add("hidden");}});
+els.importButton.addEventListener("click",()=>els.importFile.click()); els.importFile.addEventListener("change",async()=>{const file=els.importFile.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());const authors=Array.isArray(data)?data:data.authors;if(!Array.isArray(authors))throw new Error();if(!confirm(`Importovat ${authors.length} autorů a nahradit současná data?`))return;state.authors=authors;state.selectedId=isMobileLayout()?null:(sortAuthors(state.authors)[0]?.id||null);save();render();showToast("Databáze importována");}catch{alert("Soubor se nepodařilo importovat. Zkontroluj, že jde o JSON export z této aplikace.");}finally{els.importFile.value="";els.dataMenu.classList.add("hidden");}});
 
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();els.dataMenu.classList.add("hidden");}});
 

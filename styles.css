@@ -1011,3 +1011,19 @@ html, body {
     max-width: 100% !important;
   }
 }
+
+
+/* V15 — mobile-first author selection */
+@media (max-width: 640px) {
+  .author-detail-panel.mobile-detail-hidden {
+    display: none !important;
+  }
+
+  .author-list {
+    max-height: 368px !important;
+  }
+
+  .author-detail-panel {
+    scroll-margin-top: 12px;
+  }
+}
