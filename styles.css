@@ -1220,3 +1220,34 @@ body.database-empty .author-list .empty-list {
   box-sizing:border-box !important;
   transform:none !important;
 }
+
+
+/* V19 — correct selector: #authorListEmpty is a sibling of #authorList */
+body.database-empty .authors-sidebar {
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+body.database-empty #authorList {
+  display:none !important;
+}
+
+body.database-empty #authorListEmpty.empty-gmail {
+  flex:1 1 auto !important;
+  min-height:0 !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 24px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  box-sizing:border-box !important;
+}
+
+/* Keep the same true centering on phone and desktop. */
+@media (max-width: 640px) {
+  body.database-empty #authorListEmpty.empty-gmail {
+    padding:0 20px !important;
+  }
+}
