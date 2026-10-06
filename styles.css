@@ -1253,9 +1253,25 @@ body.database-empty #authorListEmpty.empty-gmail {
 }
 
 
-/* v19 gap fix — remove artificial desktop whitespace before footer */
+/* v19 — desktop footer spacing matched to LV-FA Import */
 @media (min-width: 901px) {
+  body:not(.database-empty) main,
+  body:not(.database-empty) .main,
+  body:not(.database-empty) .app-main {
+    min-height:0 !important;
+    height:auto !important;
+  }
+
   body:not(.database-empty) .authors-layout {
-    min-height: 0 !important;
+    min-height:0 !important;
+    height:auto !important;
+    margin-bottom:26px !important;
+  }
+
+  body:not(.database-empty) .copyright,
+  body:not(.database-empty) .copyright-line,
+  body:not(.database-empty) .legal-line {
+    margin-top:0 !important;
+    margin-bottom:28px !important;
   }
 }
