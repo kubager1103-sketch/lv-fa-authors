@@ -1251,13 +1251,3 @@ body.database-empty #authorListEmpty.empty-gmail {
     padding:0 20px !important;
   }
 }
-
-
-/* V20 — desktop: show 8 author rows, then scroll */
-@media (min-width: 641px) {
-  body:not(.database-empty) #authorList {
-    max-height: calc(8 * 56px) !important;
-    overflow-y: auto !important;
-    overscroll-behavior: contain;
-  }
-}
