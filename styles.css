@@ -1178,3 +1178,45 @@ body.database-empty .authors-sidebar p:only-child {
   align-self:center !important;
   text-align:center !important;
 }
+
+
+/* V18 — center ONLY the "Žádný autor neodpovídá hledání." message
+   in the remaining list area below the add-author button. */
+body.database-empty .author-list {
+  position:relative !important;
+  flex:1 !important;
+  min-height:0 !important;
+}
+
+body.database-empty .author-list .list-empty,
+body.database-empty .author-list .empty,
+body.database-empty .author-list .empty-state,
+body.database-empty .author-list [data-empty] {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 20px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  box-sizing:border-box !important;
+  transform:none !important;
+}
+
+body.database-empty .author-list .empty-list {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 20px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  box-sizing:border-box !important;
+  transform:none !important;
+}
