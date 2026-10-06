@@ -1251,3 +1251,30 @@ body.database-empty #authorListEmpty.empty-gmail {
     padding:0 20px !important;
   }
 }
+
+
+/* V21 — desktop list: exactly 8 author rows visible, the rest scrolls */
+@media (min-width: 901px) {
+  body:not(.database-empty) .authors-sidebar {
+    height:auto !important;
+    min-height:0 !important;
+    align-self:start !important;
+    overflow:hidden !important;
+  }
+
+  body:not(.database-empty) #authorList.author-list {
+    height:auto !important;
+    max-height:368px !important; /* 8 × 46px */
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    overscroll-behavior:contain;
+  }
+
+  body:not(.database-empty) #authorList .author-list-item {
+    box-sizing:border-box !important;
+    height:46px !important;
+    min-height:46px !important;
+    padding:0 16px !important;
+    flex:none !important;
+  }
+}
