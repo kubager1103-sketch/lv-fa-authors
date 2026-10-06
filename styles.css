@@ -1027,3 +1027,75 @@ html, body {
     scroll-margin-top: 12px;
   }
 }
+
+
+/* V16 — hamburger from LV-FA Import + balanced empty database state */
+#dataMenuButton {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+#dataMenuButton .menu-line {
+  display:block;
+  width:22px;
+  height:2px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:2px;
+}
+
+/* Only when the database truly contains no authors:
+   keep both desktop panels equal and finish the page at the footer. */
+@media (min-width: 901px) {
+  body.database-empty .authors-main {
+    min-height:calc(100dvh - 116px);
+    display:flex;
+    flex-direction:column;
+  }
+  body.database-empty .authors-layout {
+    flex:1;
+    min-height:0;
+    align-items:stretch;
+  }
+  body.database-empty .authors-sidebar,
+  body.database-empty .author-detail-panel {
+    height:100%;
+    min-height:0;
+    align-self:stretch;
+  }
+  body.database-empty .author-empty-state {
+    min-height:100%;
+  }
+  body.database-empty .app-footer {
+    margin-top:18px;
+  }
+}
+
+/* On phones the detail stays hidden until an author is selected.
+   With an empty database, extend the list panel so the footer sits at
+   the bottom of the screen instead of halfway up the page. */
+@media (max-width: 640px) {
+  #dataMenuButton .menu-line {
+    width:20px;
+    height:2px;
+  }
+  body.database-empty .authors-main {
+    min-height:calc(100dvh - 86px);
+    display:flex;
+    flex-direction:column;
+  }
+  body.database-empty .authors-layout {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  body.database-empty .authors-sidebar {
+    flex:1;
+    min-height:420px;
+  }
+  body.database-empty .app-footer {
+    margin-top:18px;
+  }
+}

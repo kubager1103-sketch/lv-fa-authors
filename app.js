@@ -73,7 +73,7 @@ function renderDetail(){
   els.sources.querySelectorAll("[data-credit-index]").forEach(b=>b.addEventListener("click",()=>copyCredit((sources[Number(b.dataset.creditIndex)]||{}).credit||defaultCredit(a,sources[Number(b.dataset.creditIndex)]||{}),b)));
 }
 function defaultCredit(a,s){ return [fullName(a),a.instagram?`@${handle(a.instagram)}`:"",s.label||""].filter(Boolean).join(" | "); }
-function render(){ renderList(); renderDetail(); }
+function render(){ document.body.classList.toggle("database-empty", state.authors.length===0); renderList(); renderDetail(); }
 
 async function copyCredit(text,button){
   try { await navigator.clipboard.writeText(text); }
