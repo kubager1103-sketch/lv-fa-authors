@@ -1099,3 +1099,82 @@ html, body {
     margin-top:18px;
   }
 }
+
+
+/* V17 — menu icon matching LV-FA Import reference */
+#dataMenuButton {
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:5px !important;
+}
+#dataMenuButton:hover,
+#dataMenuButton:focus,
+#dataMenuButton:active {
+  background:transparent !important;
+}
+#dataMenuButton .menu-line {
+  display:block !important;
+  width:27px !important;
+  height:3px !important;
+  margin:0 !important;
+  background:#000 !important;
+  border-radius:2px !important;
+}
+
+/* Center the no-results message inside the author-list area on every screen. */
+.author-list-empty {
+  height:100%;
+  min-height:100%;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+/* The list itself must give the empty message the remaining panel height. */
+body.database-empty .author-list {
+  flex:1 !important;
+  max-height:none !important;
+  min-height:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+}
+body.database-empty .authors-sidebar {
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+/* Mobile: same hamburger proportions as the reference screenshot. */
+@media (max-width: 640px) {
+  #dataMenuButton {
+    width:44px !important;
+    height:44px !important;
+  }
+  #dataMenuButton .menu-line {
+    width:25px !important;
+    height:3px !important;
+    border-radius:2px !important;
+  }
+}
+
+
+body.database-empty .authors-sidebar .empty,
+body.database-empty .authors-sidebar .empty-state,
+body.database-empty .authors-sidebar [data-empty],
+body.database-empty .authors-sidebar p:only-child {
+  margin:auto !important;
+  align-self:center !important;
+  text-align:center !important;
+}
