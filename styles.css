@@ -1251,3 +1251,11 @@ body.database-empty #authorListEmpty.empty-gmail {
     padding:0 20px !important;
   }
 }
+
+
+/* v19 gap fix — remove artificial desktop whitespace before footer */
+@media (min-width: 901px) {
+  body:not(.database-empty) .authors-layout {
+    min-height: 0 !important;
+  }
+}
